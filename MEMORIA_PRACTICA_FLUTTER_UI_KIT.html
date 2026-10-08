@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Memoria de Práctica: UI Kit y Componentes en Flutter</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #e0e7ff;
+      --text: #1f2937;
+      --text-muted: #4b5563;
+      --bg: #ffffff;
+      --code-bg: #f3f4f6;
+      --border: #e5e7eb;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background-color: #f9fafb;
+    }
+    .container {
+      background: var(--bg);
+      padding: 48px;
+      border-radius: 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    }
+    header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 24px;
+      margin-bottom: 32px;
+    }
+    h1 {
+      color: var(--primary);
+      font-size: 2.2rem;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    .metadata {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      background: var(--primary-light);
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      color: #3730a3;
+      margin-top: 16px;
+    }
+    h2 {
+      color: #1e1b4b;
+      font-size: 1.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+      margin-top: 40px;
+    }
+    h3 {
+      color: #312e81;
+      font-size: 1.2rem;
+      margin-top: 24px;
+    }
+    p, li {
+      color: var(--text-muted);
+    }
+    strong {
+      color: var(--text);
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      overflow-x: auto;
+      font-size: 0.9rem;
+      font-family: "Cascadia Code", Consolas, Monaco, monospace;
+    }
+    code {
+      background: var(--code-bg);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.9em;
+      font-family: "Cascadia Code", Consolas, Monaco, monospace;
+      color: #b91c1c;
+    }
+    pre code {
+      background: transparent;
+      padding: 0;
+      color: #1f2937;
+    }
+    blockquote {
+      border-left: 4px solid var(--primary);
+      background-color: var(--primary-light);
+      margin: 16px 0;
+      padding: 14px 20px;
+      border-radius: 0 8px 8px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid var(--border);
+      padding: 10px 14px;
+      text-align: left;
+    }
+    th {
+      background: var(--code-bg);
+      font-weight: 600;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: #dcfce7;
+      color: #15803d;
+    }
+    @media print {
+      body { background: white; padding: 0; }
+      .container { box-shadow: none; padding: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1>Memoria de Práctica: UI Kit y Componentes en Flutter</h1>
+    <div class="metadata">
+      <div><strong>Módulo:</strong> Diseño de Interfaces (2º DAM)</div>
+      <div><strong>Alumno:</strong> Ayoub Atidi Belbaz</div>
+      <div><strong>Curso:</strong> 2026 / 2027</div>
+      <div><strong>Estado:</strong> <span class="badge">100% Completado</span></div>
+    </div>
+  </header>
+
+  <h2>1. Resumen Ejecutivo del Proyecto</h2>
+  <p>
+    En esta práctica se ha desarrollado un ecosistema completo de componentes reutilizables en Flutter:
+  </p>
+  <ul>
+    <li><strong><code>ui_kit_dam</code></strong>: Paquete desacoplado de componentes con soporte de accesibilidad, validaciones de rango seguro en desarrollo y producción, pruebas completas (unitarias, widget y golden) con <strong>100% de cobertura de código</strong>, y análisis estático estricto (<code>public_member_api_docs</code> con 0 advertencias).</li>
+    <li><strong>Catálogo interactivo (Widgetbook)</strong>: Implementación en <code>lib/ui_kit_dam_widgetbook.dart</code> con historias "Por defecto" y "Configurable" mediante <em>knobs</em>.</li>
+    <li><strong><code>stepper_demo</code></strong>: Aplicación consumidora que enlaza el paquete fijando la etiqueta Git <code>v1.1.0</code>, con internacionalización completa en español e inglés, plurales en formato ARB, formateo de moneda y fecha, y flujo de compra de entradas.</li>
+  </ul>
+
+  <h2>2. Sección A1: Primer Componente y Catálogo</h2>
+  <h3>2.1 Creación del StatefulWidget (<code>lib/src/quantity_stepper.dart</code>)</h3>
+  <p>El componente se ubica de manera encapsulada en <code>lib/src/quantity_stepper.dart</code> y renderiza una fila (<code>Row</code>) con:</p>
+  <ul>
+    <li>Botón de decrementar con icono <code>Icons.remove</code>.</li>
+    <li>Texto central con el valor numérico actual.</li>
+    <li>Botón de incrementar con icono <code>Icons.add</code>.</li>
+  </ul>
+
+  <h3>2.2 Cuestión Teórica Obligatoria</h3>
+  <blockquote>
+    <p><strong>Pregunta:</strong> ¿Por qué este componente es un StatefulWidget e InfoBadge no?</p>
+    <p><strong>Respuesta detallada:</strong><br>
+    <strong><code>QuantityStepper</code> es un <code>StatefulWidget</code></strong> porque mantiene un <strong>estado interno mutable</strong> (<code>_value</code>) que evoluciona a lo largo del tiempo de vida del widget cuando el usuario pulsa los botones de incremento o decremento. Para reflejar visualmente este cambio en pantalla sin obligar al widget padre a redibujar todo el árbol externo, su clase de estado asociada (<code>State&lt;QuantityStepper&gt;</code>) invoca <code>setState()</code>, marcando el elemento en el árbol como "sucio" (<em>dirty</em>) para que el framework reejecute su método <code>build()</code>.<br><br>
+    En cambio, <strong><code>InfoBadge</code> es un <code>StatelessWidget</code></strong> porque es un componente <strong>puramente presentacional e inmutable</strong>. Solo recibe propiedades fijas desde su constructor (texto de etiqueta, color, icono) y las dibuja en pantalla sin almacenar ningún dato dinámico ni modificar su propia configuración. Si la información cambia, la responsabilidad es del widget padre que vuelve a instanciarlo con nuevos valores.</p>
+  </blockquote>
+
+  <h2>3. Sección A2: Propiedades y Valores por Defecto</h2>
+  <h3>3.1 Propiedades del Componente</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Propiedad</th>
+        <th>Tipo</th>
+        <th>Valor por Defecto</th>
+        <th>Propósito</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><code>min</code></td><td><code>int</code></td><td><code>0</code></td><td>Límite inferior admitido.</td></tr>
+      <tr><td><code>max</code></td><td><code>int</code></td><td><code>10</code></td><td>Límite superior admitido.</td></tr>
+      <tr><td><code>step</code></td><td><code>int</code></td><td><code>1</code></td><td>Salto numérico por pulsación.</td></tr>
+      <tr><td><code>initialValue</code></td><td><code>int?</code></td><td><code>min</code></td><td>Valor numérico con el que arranca.</td></tr>
+      <tr><td><code>semanticLabel</code></td><td><code>String</code></td><td><code>'Cantidad'</code></td><td>Etiqueta para lectores de pantalla (accesibilidad).</td></tr>
+      <tr><td><code>decrementTooltip</code></td><td><code>String</code></td><td><code>'Restar'</code></td><td>Mensaje contextual del botón de resta.</td></tr>
+      <tr><td><code>incrementTooltip</code></td><td><code>String</code></td><td><code>'Sumar'</code></td><td>Mensaje contextual del botón de suma.</td></tr>
+      <tr><td><code>onChanged</code></td><td><code>ValueChanged&lt;int&gt;?</code></td><td><code>null</code></td><td>Notificación de nuevo valor emitido.</td></tr>
+      <tr><td><code>onLimitReached</code></td><td><code>LimitReached?</code></td><td><code>null</code></td><td>Notificación al alcanzar mínimos o máximos.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>3.2 Validación con Assert y Seguridad en Release</h3>
+  <p>En tiempo de desarrollo se comprueban aserciones estrictas:</p>
+  <pre><code>assert(min &lt; max, 'min debe ser menor que max'),
+assert(step &gt; 0, 'step debe ser mayor que 0'),
+assert(
+  (initialValue ?? min) &gt;= min &amp;&amp; (initialValue ?? min) &lt;= max,
+  'initialValue debe estar entre min y max',
+);</code></pre>
+  <p>Para asegurar que en modo <code>release</code> (donde los asserts se desactivan) el valor nunca escape del rango, se utiliza la función pura <code>nextStepperValue</code> aplicando <code>.clamp(widget.min, widget.max)</code>.</p>
+
+  <h3>3.3 Desactivación de Botones en los Extremos</h3>
+  <p>Cuando el valor alcanza el límite inferior o superior, los botones reciben <code>onPressed: null</code>, quedando visual y funcionalmente inactivos según las especificaciones de Material Design.</p>
+
+  <h2>4. Sección A3: Eventos Propios</h2>
+  <pre><code>enum StepperLimit { min, max }
+typedef LimitReached = void Function(StepperLimit limit);</code></pre>
+  <p>
+    El método de actualización comprueba si el valor efectivamente cambia antes de emitir cualquier evento. Si se alcanza un extremo, se despacha <code>onLimitReached(StepperLimit.max)</code> o <code>onLimitReached(StepperLimit.min)</code>, permitiendo mostrar avisos contextuales mediante un <code>SnackBar</code> ("Has llegado al máximo").
+  </p>
+
+  <h2>5. Sección A4: Pruebas y Cobertura de Código</h2>
+  <h3>5.1 Métricas de Pruebas Automatizadas</h3>
+  <ul>
+    <li><strong>Pruebas unitarias de función pura:</strong> 4 pruebas comprobando incremento normal, decremento normal, y protección de límites inferior y superior con clamp.</li>
+    <li><strong>Pruebas de widget:</strong> Pruebas que verifican el incremento visual, emisión de <code>onChanged</code>, desactivación del botón <code>-</code> en el mínimo, y disparo de <code>onLimitReached</code>.</li>
+    <li><strong>Prueba Golden:</strong> Regresión visual del componente con valor 5 validada contra <code>test/goldens/quantity_stepper_5.png</code>.</li>
+  </ul>
+
+  <h3>5.2 Reporte de Cobertura (<code>flutter test --coverage</code>)</h3>
+  <pre><code>SF:lib\src\quantity_stepper.dart | LF:49 | LH:49 (100.0% de cobertura)
+SF:lib\src\info_badge.dart       | LF:15 | LH:15 (100.0% de cobertura)
+SF:lib\src\star_rating.dart      | LF:15 | LH:15 (100.0% de cobertura)
+Resultado: 13 tests ejecutados, 13 pasados, 100% de cobertura de código.</code></pre>
+
+  <h2>6. Sección A5: Documentación y Análisis Estático</h2>
+  <ul>
+    <li>Documentación completa con comentarios <code>///</code> y ejemplos de uso en código.</li>
+    <li>Regla <code>public_member_api_docs</code> activada en <code>analysis_options.yaml</code>.</li>
+    <li><code>dart analyze</code> ejecutado con <strong>0 incidencias</strong>.</li>
+    <li>Generación de documentación HTML con <code>dartdoc</code> en <code>doc/api/</code> con 0 advertencias y 0 errores.</li>
+  </ul>
+
+  <h2>7. Sección A6: Empaquetado y Publicación</h2>
+  <ul>
+    <li>Versión <code>1.1.0</code> documentada en <code>pubspec.yaml</code> y <code>CHANGELOG.md</code>.</li>
+    <li>Etiquetado en Git mediante el tag <code>v1.1.0</code>.</li>
+    <li>Comprobación con <code>flutter pub publish --dry-run</code>: <strong>0 warnings y validación correcta</strong>.</li>
+  </ul>
+
+  <h2>8. Sección A7: Aplicación Internacionalizada (<code>stepper_demo</code>)</h2>
+  <p>La aplicación consumidora integra:</p>
+  <ul>
+    <li>Internacionalización basada en <code>l10n.yaml</code>, <code>app_es.arb</code> y <code>app_en.arb</code>.</li>
+    <li>Soporte de plurales en ARB: <code>"{count, plural, =1{1 entrada} other{{count} entradas}}"</code>.</li>
+    <li>Formateo de moneda a 4,50 € y recálculo reactivo con <code>NumberFormat.currency</code>.</li>
+    <li>Formateo de fecha según localidad con <code>DateFormat.yMMMMEEEEd</code>.</li>
+    <li>Componente interactivo <code>StarRating</code> para valorar el evento de 1 a 5 estrellas.</li>
+    <li>Conmutación de idioma en vivo mediante botón en AppBar y capturas Golden generadas en <code>stepper_demo/test/goldens/</code>.</li>
+  </ul>
+</div>
+
+</body>
+</html>

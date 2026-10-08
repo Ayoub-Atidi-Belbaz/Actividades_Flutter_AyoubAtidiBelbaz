@@ -1,0 +1,17 @@
+{
+  "@@locale": "en",
+  "appTitle": "Ticket Purchase",
+  "eventTitle": "DAM Music Festival 2026",
+  "eventDateLabel": "Event Date",
+  "ticketCount": "{count, plural, =1{1 ticket} other{{count} tickets}}",
+  "unitPriceLabel": "Unit price: €4.50",
+  "totalPrice": "Total: {total}",
+  "rateEventPrompt": "Rate this event:",
+  "buyButton": "Confirm Purchase",
+  "limitReachedMax": "You have reached the maximum of 8 tickets",
+  "limitReachedMin": "The minimum is 1 ticket",
+  "stepperSemanticLabel": "Ticket quantity",
+  "stepperDecrementTooltip": "Remove ticket",
+  "stepperIncrementTooltip": "Add ticket",
+  "switchLanguage": "Español"
+}
