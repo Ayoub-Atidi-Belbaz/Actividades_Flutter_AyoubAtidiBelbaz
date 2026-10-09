@@ -1,0 +1,28 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "ui_kit_dam",
+            "cwd": "Actividad_A6_Empaquetado_y_Versionado\\ui_kit_dam",
+            "request": "launch",
+            "type": "dart"
+        },
+        {
+            "name": "ui_kit_dam (profile mode)",
+            "cwd": "Actividad_A6_Empaquetado_y_Versionado\\ui_kit_dam",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile"
+        },
+        {
+            "name": "ui_kit_dam (release mode)",
+            "cwd": "Actividad_A6_Empaquetado_y_Versionado\\ui_kit_dam",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release"
+        }
+    ]
+}
