@@ -7,10 +7,10 @@
    ```yaml
    ui_kit_dam:
      git:
-       url: ../ui_kit_dam
+       url: https://github.com/Ayoub-Atidi-Belbaz/ui_kit_dam.git
        ref: v1.1.0
    ```
-4. Ejecución de `flutter pub publish --dry-run` en el paquete: validado exitosamente con **0 advertencias (Package has 0 warnings)**.
+4. Ejecución de `dart pub publish --dry-run` en el paquete: validado exitosamente con **0 advertencias (Package has 0 warnings)**.
 
 ## Archivos incluidos en este ejercicio:
 - Carpeta `ui_kit_dam/`: Paquete completo listo para publicación.
